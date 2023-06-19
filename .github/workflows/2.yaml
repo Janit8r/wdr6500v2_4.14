@@ -1,4 +1,5 @@
 name: Build PostmarketOS for LeEco ZL1
+
 on:
   workflow_dispatch:
 #  schedule:
@@ -27,7 +28,7 @@ jobs:
         run: |
           git clone https://gitlab.com/postmarketOS/pmbootstrap.git
           cd pmbootstrap
-          ./pmbootstrap.py init
+          ./pmbootstrap.py init --details-to-stdout
 
       - name: Configure PostmarketOS build for LeEco ZL1
         run: |
@@ -37,7 +38,7 @@ jobs:
       - name: Build PostmarketOS
         run: |
           cd pmbootstrap
-          ./pmbootstrap install --details-to-stdout
+          ./pmbootstrap install --details-to-stdout || { echo 'Build failed' ; exit 1; }
 
       - name: Compress and store build artifacts
         run: |
