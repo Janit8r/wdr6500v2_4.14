@@ -18,13 +18,16 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
+          sudo apt-get install git curl wget zip unzip python3 python3-pip
+          sudo pip3 install -U setuptools
+          sudo pip3 install -U west
           sudo apt-get install -y git build-essential gcc-arm-linux-gnueabihf
 
       - name: Clone PostmarketOS repository
         run: |
           git clone https://gitlab.com/postmarketOS/pmbootstrap.git
           cd pmbootstrap
-          ./pmbootstrap init
+          ./pmbootstrap.py init
 
       - name: Configure PostmarketOS build for LeEco ZL1
         run: |
