@@ -32,12 +32,12 @@ jobs:
       - name: Configure PostmarketOS build for LeEco ZL1
         run: |
           cd pmbootstrap
-          ./pmbootstrap config --arch armhf --device zl1
+          ./pmbootstrap config --arch armhf --device zl1 --details-to-stdout
 
       - name: Build PostmarketOS
         run: |
           cd pmbootstrap
-          ./pmbootstrap install
+          ./pmbootstrap install --details-to-stdout
 
       - name: Compress and store build artifacts
         run: |
