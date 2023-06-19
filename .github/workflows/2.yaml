@@ -27,17 +27,17 @@ jobs:
         run: |
           git clone https://gitlab.com/postmarketOS/pmbootstrap.git
           cd pmbootstrap
-          python pmbootstrap.py init
+          sudo ./pmbootstrap.py init
 
       - name: Configure PostmarketOS build for LeEco ZL1
         run: |
           cd pmbootstrap
-          python pmbootstrap.py config --arch armhf --device zl1
+          sudo ./pmbootstrap config --arch armhf --device zl1
 
       - name: Build PostmarketOS
         run: |
           cd pmbootstrap
-          python pmbootstrap.py install
+          sudo ./pmbootstrap install
 
       - name: Compress and store build artifacts
         run: |
