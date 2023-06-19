@@ -1,0 +1,45 @@
+name: Build PostmarketOS for LeEco ZL1
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git build-essential gcc-arm-linux-gnueabihf
+
+      - name: Clone PostmarketOS repository
+        run: |
+          git clone https://gitlab.com/postmarketOS/pmbootstrap.git
+          cd pmbootstrap
+          ./pmbootstrap init
+
+      - name: Configure PostmarketOS build for LeEco ZL1
+        run: |
+          cd pmbootstrap
+          ./pmbootstrap config --arch armhf --device zl1
+
+      - name: Build PostmarketOS
+        run: |
+          cd pmbootstrap
+          ./pmbootstrap install
+
+      - name: Compress and store build artifacts
+        run: |
+          cd pmbootstrap
+          tar -czvf postmarketos.tar.gz output/
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: postmarketos
+          path: pmbootstrap/postmarketos.tar.gz
