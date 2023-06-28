@@ -32,7 +32,8 @@ jobs:
         run: |
           domain=$(cat input/domain.txt)
           subfinder -d $domain -o output/subdomains.txt
-          nuclei -ut -l output/subdomains.txt -o output/vuln.txt -s medium
+          nuclei -l output/subdomains.txt -o output/vuln.txt -s medium
+          sudo find /-name nuclei-tamplates
 
       # push到当前仓库
       - name: Commit files
