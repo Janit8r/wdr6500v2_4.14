@@ -33,6 +33,7 @@ jobs:
           domain=$(cat input/domain.txt)
           subfinder -d $domain -o output/subdomains.txt
           git clone https://github.com/ExpLangcn/NucleiTP.git
+          ls -al ./NucleiTP
           nuclei -ud "./NucleiTP" -l output/subdomains.txt -o output/vuln.txt -s medium
 
       # push到当前仓库
