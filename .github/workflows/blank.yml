@@ -32,6 +32,8 @@ jobs:
         run: |
           domain=$(cat input/domain.txt)
           subfinder -d $domain -o output/subdomains.txt
+          git clone https://github.com/ExpLangcn/NucleiTP.git
+          cp -r NucleiTP /home/runner/nuclei-templates/file
           nuclei -l output/subdomains.txt -o output/vuln.txt -s medium
           sudo ls -al /home/runner/nuclei-templates/file
 
