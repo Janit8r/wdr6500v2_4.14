@@ -33,7 +33,7 @@ jobs:
           domain=$(cat input/domain.txt)
           subfinder -d $domain -o output/subdomains.txt
           nuclei -l output/subdomains.txt -o output/vuln.txt -s medium
-          sudo ls -al /home/runner/nuclei-templates
+          sudo ls -al /home/runner/nuclei-templates/file
 
       # push到当前仓库
       - name: Commit files
