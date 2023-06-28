@@ -33,9 +33,8 @@ jobs:
           domain=$(cat input/domain.txt)
           subfinder -d $domain -o output/subdomains.txt
           git clone https://github.com/ExpLangcn/NucleiTP.git
-          find / -name "nuclei-templates"
-          # cp -Rn NucleiTP/* $(find / -name "nuclei-templates")
-          # nuclei -l output/subdomains.txt -o output/vuln.txt -s medium
+          cp -Rn NucleiTP/* $(find / -type d -name "nuclei-templates")/file/
+          nuclei -l output/subdomains.txt -o output/vuln.txt -s medium
 
       # push到当前仓库
       - name: Commit files
